@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Outlet, Link, useLocation } from 'react-router-dom'
-import { useAuthStore } from '../stores/authStore'
+//import { useAuthStore } from '../stores/authStore'
 import ThemeToggle from './ThemeToggle'
 
 import {
@@ -29,7 +29,13 @@ const navigation = [
 
 export default function Layout() {
   const location = useLocation()
-  const { user, logout } = useAuthStore()
+ const user = {
+  full_name: 'Demo User',
+  email: 'demo@example.com',
+  company_name: 'Free Plan',
+}
+
+const logout = () => {}
   const displayName = user?.full_name || user?.email || 'Demo User'
   const companyName = user?.company_name || 'Free Plan'
   const [isCollapsed, setIsCollapsed] = useState(false)
@@ -135,7 +141,7 @@ export default function Layout() {
           isCollapsed ? 'pl-20' : 'pl-64'
         }`}
       >
-        <header className="sticky top-0 z-30 flex items-center justify-end gap-1 px-8 py-3 bg-white/80 backdrop-blur-md border-b border-gray-200/60">
+        <header className="sticky top-0 z-30 flex items-center justify-end gap-1 px-8 py-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-b border-gray-200/60 dark:border-gray-700">
           <NotificationBell />
           <ThemeToggle />
         </header>

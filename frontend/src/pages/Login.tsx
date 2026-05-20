@@ -13,27 +13,11 @@ export default function Login() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
-
-    try {
-      const tokenData = await authApi.login(email, password)
-      setAuth(tokenData.access_token, null)  
-      const user = await authApi.getMe()     
-      setAuth(tokenData.access_token, user)  
-      navigate('/')
-    } catch (err) {
-      if (axios.isAxiosError(err) && err.response?.data?.detail) {
-        setError(err.response.data.detail)
-      } else {
-        setError('Unable to sign in. Please check your credentials and try again.')
-      }
-    } finally {
-      setLoading(false)
-    }
-  }
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
+  navigate('/')
+}
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
