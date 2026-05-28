@@ -53,27 +53,6 @@ class ChangePasswordRequest(BaseModel):
             raise ValueError("Password must contain: " + ", ".join(errors))
         return v
 
-
-class ChangePasswordRequest(BaseModel):
-    current_password: str
-    new_password: str
-
-    @field_validator("new_password")
-    @classmethod
-    def validate_new_password(cls, v: str) -> str:
-        errors = []
-        if len(v) < 8:
-            errors.append("at least 8 characters")
-        if not re.search(r'[A-Z]', v):
-            errors.append("at least one uppercase letter")
-        if not re.search(r'\d', v):
-            errors.append("at least one digit")
-        if not re.search(r'[!@#$%^&*]', v):
-            errors.append("at least one special character (!@#$%^&*)")
-        if errors:
-            raise ValueError("Password must contain: " + ", ".join(errors))
-        return v
-
 router = APIRouter()
 users_router = APIRouter()
 
